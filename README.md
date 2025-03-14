@@ -1,7 +1,7 @@
 # fetch-rewards-analytics-engg
 This is the base repository containing the artifacts related to the take-home assessment
 
-<!-- ------------------Setting up the data infrastructure & loading into database for data analysis requirements ------------------ -->
+// Setting up the data infrastructure & loading into database for data analysis requirements 
 1. Clone this repo --> git clone
 2. Create a new virtual environment on python 3.11 --> /opt/homebrew/bin/python3.11 -m venv fetch_venv
 3. Open terminal and run the command --> pip install -r requirements.txt
@@ -59,7 +59,7 @@ COPY INTO ldg_receipts
     (a) dbt run -s models.analytics -t dev
 11. After all the above steps are completed, this step is optional but can provide insight into how the data pipeline has been designed to provide an end-to-end view. The lineage can be viewed in the repo path --> fetch-rewards-analytics-engg/design/data_pipeline_lineage/. For this step, run the command --> dbt docs generate and then dbt docs serve. This should open a localhost/8080 on the web browser displaying each model and their lineage.
 
-<!-- ------------------Assessment tasks and response documentation ------------------ -->
+// Assessment tasks and response documentation 
 # First: Review Existing Unstructured Data and Diagram a New Structured Relational Data Model
 A star schema data modelling technique has been used pursuant to Kimball's methodology to design the entity relationship diagram. This diagram can be found in the path of this repo --> fetch-rewards-analytics-engg/design/ERD.pdf.
 Fact Tables overview:
