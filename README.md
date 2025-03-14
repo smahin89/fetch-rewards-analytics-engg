@@ -38,7 +38,7 @@ This is the base repository containing the artifacts related to the take-home as
 
 COPY INTO ldg_receipts
     FROM (
-        SELECT a.$1, sysdate(), 'com.redica.dev-snowflake/'|| METADATA$FILENAME
+        SELECT a.$1, sysdate(), 's3-bucket/'|| METADATA$FILENAME
         FROM '@<enter database>.SHARED_OBJECTS.<enter stage>/' a
     )
     FILES = ('receipts.json')
