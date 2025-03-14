@@ -2,12 +2,12 @@
 This is the base repository containing the artifacts related to the take-home assessment
 
 // Setting up the data infrastructure & loading into database for data analysis requirements 
-1. Clone this repo --> '''git clone'''
-4. Create a new virtual environment on python 3.11 --> '''/opt/homebrew/bin/python3.11 -m venv fetch_venv'''
-5. Open terminal and run the command --> '''pip install -r requirements.txt'''
+1. Clone this repo --> '''git clone
+4. Create a new virtual environment on python 3.11 --> '''/opt/homebrew/bin/python3.11 -m venv fetch_venv
+5. Open terminal and run the command --> '''pip install -r requirements.txt
 6. I have used DBT or "Data Build Tool" for building the sql scripts as data models which can be used as building blocks of data pipeline using an orchestration system like Airflow. If dbt core is already setup, then skip the next steps and move onyo 5, else follow along for DBT setup
 
-(a) dbt_project.yml file is provided; no additional setup required. Once dbt is installed, the following command need to be executed to point to the project path --> '''export DBT_PROJECT_DIR=/users/local_user/fetch-rewards-analytics-engg/fetch-rewards-analytics-engg/dbt/snowstorm/dbt_project.yml'''
+(a) dbt_project.yml file is provided; no additional setup required. Once dbt is installed, the following command need to be executed to point to the project path --> '''export DBT_PROJECT_DIR=/users/local_user/fetch-rewards-analytics-engg/fetch-rewards-analytics-engg/dbt/snowstorm/dbt_project.yml
 
 (b) create a profiles.yml file using the below template in the snowstorm root directory, in the same level as dbt_project.yml. If dbt core is already setup, then skip this set and move to step (c) -->
   '''snowstorm:
@@ -27,19 +27,19 @@ This is the base repository containing the artifacts related to the take-home as
             connect_retries: 0
             connect_timeout: 10
             retry_on_database_errors: False
-            retry_all: False'''
+            retry_all: False
 
-(c) Run command from terminal --> '''export DBT_PROJECT_DIR=/users/localuser/fetch-rewards-analytics-engg/fetch-rewards-analytics-engg/dbt/snowstorm/profiles.yml'''
+(c) Run command from terminal --> '''export DBT_PROJECT_DIR=/users/localuser/fetch-rewards-analytics-engg/fetch-rewards-analytics-engg/dbt/snowstorm/profiles.yml
 
-(d) Run command --> '''dbt deps'''
+(d) Run command --> '''dbt deps
 
-(e) Finally verify installation with command --> '''dbt debug'''
+(e) Finally verify installation with command --> '''dbt debug
 8. I have used Snowflake as the choice of data warehouse setting up the data model and schema. For setting up the data loading tables, run the following commands on terminal while setting the working directory as dbt/snowstorm, which can be found --> dbt/snowstorm/macros/*.sql
-(a) '''dbt run-operation -s ddl_create_ldg_brands -t dev'''
+(a) '''dbt run-operation -s ddl_create_ldg_brands -t dev
 
-(b) '''dbt run-operation -s ddl_create_ldg_users -t dev'''
+(b) '''dbt run-operation -s ddl_create_ldg_users -t dev
 
-(c) '''dbt run-operation -s ddl_create_ldg_receipts -t dev'''
+(c) '''dbt run-operation -s ddl_create_ldg_receipts -t dev
 9. I have used AWS s3 as the file storage option for to mimic a data-lake scenario where the raw files can be dropped into s3 bucket in json format. I have stored the input files into s3 bucket.
 10. Using Snowflake's sql worksheet, the input tables can be loaded for each file using the below command -->
 
@@ -52,25 +52,25 @@ This is the base repository containing the artifacts related to the take-home as
     FILE_FORMAT = (
         TYPE=JSON
     )
-    FORCE = TRUE;'''
+    FORCE = TRUE;
 
 8. Alternatively, execute the python script from path --> fetch-rewards-analytics-engg/scripts/data_loader.py with the required arguments as described in the code for each file to its target table. The script can later be used for automated file loading using Airflow or Dagster. 
 9. Next, run the command to setup the raw tables from the landing tables. This step will help to transform the data from semi-structured (non-relational) to structure (relational) format, usable for business intelligence and analytics purposes -->
-(a) '''dbt run -s raw_user -t dev'''
+(a) '''dbt run -s raw_user -t dev
 
-(b) '''dbt run -s raw_receipt -t dev'''
+(b) '''dbt run -s raw_receipt -t dev
 
-(c) '''dbt run -s raw_brand -t dev'''
+(c) '''dbt run -s raw_brand -t dev
 
-(d) '''dbt run -s raw_receipt_item -t dev'''
+(d) '''dbt run -s raw_receipt_item -t dev
 
-(e) '''dbt run -s models.raw -t dev''' (executes all models in the raw directory)
+(e) '''dbt run -s models.raw -t dev (executes all models in the raw directory)
 11. Finally, run the command to setup the data modelling star schema which will help answer the analytical queries and perform quality checks later. All these scripts can be found --> dbt/snowstorm/models/analytics/*.sql
 
-(a) '''dbt run -s models.analytics -t dev'''
+(a) '''dbt run -s models.analytics -t dev
 12. After all the above steps are completed, this step is optional but can provide insight into how the data pipeline has been designed to provide an end-to-end view. The lineage can be viewed in the repo path --> fetch-rewards-analytics-engg/design/data_pipeline_lineage/. For this step, run the command --> 
-'''dbt docs generate''' 
-'''dbt docs serve''' 
+'''dbt docs generate 
+'''dbt docs serve 
 
 This should open a localhost/8080 on the web browser displaying each model and their lineage.
 
