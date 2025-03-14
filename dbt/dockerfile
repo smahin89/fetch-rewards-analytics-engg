@@ -1,0 +1,9 @@
+FROM xemuliam/dbt
+
+COPY snowstorm /dbt
+
+WORKDIR /dbt
+
+RUN dbt deps
+
+CMD ["dbt", "debug", "--profiles-dir", "."]

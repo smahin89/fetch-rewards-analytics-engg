@@ -1,0 +1,8 @@
+
+target/
+dbt_packages/
+logs/
+.user.yml
+package-lock.yml
+profiles.yml
+analyses/eda.sql
