@@ -1,0 +1,30 @@
+name: 'snowstorm'
+version: '1.0.0'
+config-version: 2
+
+profile: 'snowstorm'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  snowstorm:
+    raw:
+      +schema: "{{ 'raw' if ((target.name == 'global-dev'))
+                              else target.schema }}"
+      +materialized: table
+      +transient: false
+    
+    analytics:
+      +schema: "{{ 'analytics' if ((target.name == 'global-dev'))
+                              else target.schema }}"
+      +materialized: view
+      +transient: false

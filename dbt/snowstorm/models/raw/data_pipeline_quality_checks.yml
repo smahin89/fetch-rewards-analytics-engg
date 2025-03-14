@@ -1,0 +1,80 @@
+version: 2
+
+models:
+    - name: raw_user
+      columns:
+        - name: user_id
+          tests:
+            - unique
+            - not_null
+        - name: active_flag
+          tests:
+            - not_null
+            - is_boolean
+        - name: created_date
+          tests:
+            - not_null
+            - is_valid_date
+        - name: last_login_date
+          tests:
+            - is_valid_date
+        - name: role
+          tests:
+            - not_null
+            - is_valid_role
+        - name: state
+          tests:
+            - not_null
+
+    - name: raw_brand
+      columns:
+        - name: brand_uuid
+          tests:
+            - unique
+            - not_null
+        - name: created_date
+          tests:
+            - not_null
+            - is_valid_date
+        - name: brand_code
+          tests:
+            - not_null
+        - name: brand_category
+          tests:
+            - not_null
+        - name: brand_category_code
+          tests:
+            - not_null
+        - name: top_brand
+          tests:
+            - not_null
+            - is_boolean
+
+    - name: raw_receipt
+      columns:
+        - name: receipt_uuid
+          tests:
+            - unique
+            - not_null
+        - name: created_date
+          tests:
+            - not_null
+            - is_valid_date
+        - name: scanned_date
+          tests:
+            - not_null
+            - is_valid_date
+        - name: finished_date
+          tests:
+            - is_valid_date
+        - name: modified_date
+          tests:
+            - not_null
+            - is_valid_date
+        - name: points_awarded_date
+          tests:
+            - is_valid_date
+        - name: purchased_date
+          tests:
+            - is_valid_date
+

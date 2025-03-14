@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: landing
+    description: "Data sources in json or semi-structured form are loaded in this schema"
+    schema: landing
+    tables:
+      - name: ldg_brands
+        identifer: ldg_brands
+      - name: ldg_users
+        identifier: ldg_users
+      - name: ldg_receipts
+        identifier: ldg_receipts
