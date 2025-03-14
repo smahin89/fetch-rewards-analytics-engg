@@ -1,4 +1,4 @@
-# fetch-rewards-analytics-engg
+# Fetch Rewards Analytics Engg by Shankar Mahindar
 This is the base repository containing the artifacts related to the take-home assessment
 
 // Setting up the data infrastructure & loading into database for data analysis requirements 
